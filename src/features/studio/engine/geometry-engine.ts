@@ -89,6 +89,10 @@ export class GeometryEngine {
       });
 
       g.on('pointerdown', (e: any) => {
+        // Stop propagation so the viewport's pointerdown handler doesn't
+        // also trigger, which would cause CANVAS_CLICKED to fire and
+        // immediately clear the selection we're about to set.
+        e.stopPropagation();
         const multi = !!(e.shiftKey ?? e.data?.originalEvent?.shiftKey ?? false);
         CanvasCommandBus.emit({ type: 'OBJECT_CLICKED', id: obj.id, multiSelect: multi });
       });

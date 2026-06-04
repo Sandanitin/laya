@@ -46,8 +46,9 @@ export class InteractionEngine {
     this.viewport.eventMode = 'static';
 
     this.viewport.on('pointerdown', (e: any) => {
-      console.log('interaction-engine pointerdown:', { button: e.button, tool: this.tool, target: e.target });
-      // Only care about left click/touch (button 0) for drawing selection/crops
+      // Only care about left click/touch (button 0) for drawing selection/crops.
+      // Geometry objects call e.stopPropagation() on their own pointerdown, so
+      // this handler only fires when clicking on the empty canvas background.
       if (e.button !== 0 || this.tool === 'pan') return;
 
       const localPos = this.viewport.toLocal(e.global);
@@ -97,7 +98,6 @@ export class InteractionEngine {
   }
 
   private handleDragEnd(e: any): void {
-    console.log('interaction-engine handleDragEnd:', { isDragging: this.isDragging, dragStart: this.dragStart });
     if (!this.isDragging || !this.dragStart) return;
 
     this.isDragging = false;
@@ -113,8 +113,6 @@ export class InteractionEngine {
 
     const dx = Math.abs(x2 - x1);
     const dy = Math.abs(y2 - y1);
-
-    console.log('interaction-engine handleDragEnd click dimensions:', { dx, dy, target: e.target });
 
     if (dx > 8 && dy > 8) {
       // Convert PIXI world coords back to raw CAD coords
@@ -134,12 +132,10 @@ export class InteractionEngine {
         CanvasCommandBus.emit({ type: 'BOX_SELECT_COMPLETE', bbox });
       }
     } else {
-      // Clean click on background -> clear selection
+      // Clean click on the canvas background → clear selection & handle placement.
+      // Geometry objects stop propagation, so this only runs for background clicks.
       const [worldX, worldY] = toWorld(x2, y2);
-      console.log('interaction-engine emitting CANVAS_CLICKED:', { worldX, worldY, targetHasGeometryId: !!(e.target && e.target.geometryId) });
-      if (!e.target || !e.target.geometryId) {
-        CanvasCommandBus.emit({ type: 'CANVAS_CLICKED', worldX, worldY });
-      }
+      CanvasCommandBus.emit({ type: 'CANVAS_CLICKED', worldX, worldY });
     }
   }
 
