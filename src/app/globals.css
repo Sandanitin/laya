@@ -1,0 +1,376 @@
+@import "tailwindcss";
+
+/* ============================================================
+   LAYA — Design System & CSS Variables
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* --- Brand Colors --- */
+    --brand-primary: 158 64% 52%;       /* Emerald */
+    --brand-primary-dim: 158 64% 38%;
+    --brand-accent: 210 100% 66%;       /* Electric Blue */
+
+    /* --- Background Scale (Dark Theme) --- */
+    --bg-void:     220 22% 7%;          /* deepest bg */
+    --bg-base:     220 20% 10%;         /* main surface */
+    --bg-surface:  220 18% 14%;         /* cards / panels */
+    --bg-elevated: 220 16% 18%;         /* elevated panels */
+    --bg-overlay:  220 14% 22%;         /* hover states */
+
+    /* --- Text Scale --- */
+    --text-primary:   0 0% 96%;
+    --text-secondary: 220 10% 65%;
+    --text-muted:     220 10% 42%;
+    --text-disabled:  220 10% 28%;
+
+    /* --- Border --- */
+    --border-subtle:  220 14% 20%;
+    --border-default: 220 12% 26%;
+    --border-strong:  220 10% 36%;
+
+    /* --- Status --- */
+    --success: 152 60% 48%;
+    --warning: 38 92% 58%;
+    --error:   0 80% 58%;
+    --info:    210 90% 60%;
+
+    /* --- Editor Specific --- */
+    --canvas-bg:       220 22% 8%;
+    --toolbar-w:       52px;
+    --pane-w:          280px;
+    --topbar-h:        48px;
+
+    /* --- Glassmorphism --- */
+    --glass-bg:      hsla(220, 20%, 14%, 0.72);
+    --glass-border:  hsla(220, 14%, 40%, 0.20);
+    --glass-blur:    16px;
+
+    /* --- Shadows --- */
+    --shadow-sm:  0 1px 3px hsla(0,0%,0%,0.4);
+    --shadow-md:  0 4px 16px hsla(0,0%,0%,0.5);
+    --shadow-lg:  0 12px 40px hsla(0,0%,0%,0.6);
+    --shadow-glow: 0 0 24px hsla(158, 64%, 52%, 0.18);
+  }
+
+  /* Light mode overrides */
+  [data-theme="light"] {
+    --bg-void:     0 0% 95%;
+    --bg-base:     0 0% 98%;
+    --bg-surface:  0 0% 100%;
+    --bg-elevated: 0 0% 96%;
+    --bg-overlay:  220 10% 92%;
+    --text-primary:   220 22% 12%;
+    --text-secondary: 220 10% 40%;
+    --text-muted:     220 10% 58%;
+    --border-subtle:  220 14% 86%;
+    --border-default: 220 12% 80%;
+    --border-strong:  220 10% 70%;
+    --canvas-bg:       220 20% 92%;
+    --glass-bg:      hsla(0, 0%, 100%, 0.78);
+    --glass-border:  hsla(220, 14%, 60%, 0.16);
+  }
+}
+
+@theme inline {
+  --color-brand:    hsl(var(--brand-primary));
+  --color-bg-base:  hsl(var(--bg-base));
+  --color-surface:  hsl(var(--bg-surface));
+  --color-elevated: hsl(var(--bg-elevated));
+  --color-overlay:  hsl(var(--bg-overlay));
+  --color-primary:  hsl(var(--text-primary));
+  --color-secondary: hsl(var(--text-secondary));
+  --color-muted:    hsl(var(--text-muted));
+  --color-border:   hsl(var(--border-default));
+  --color-success:  hsl(var(--success));
+  --color-warning:  hsl(var(--warning));
+  --color-error:    hsl(var(--error));
+  --font-sans: var(--font-outfit);
+}
+
+/* ============================================================
+   Base Reset & Typography
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: hsl(var(--bg-void));
+  color: hsl(var(--text-primary));
+  font-family: var(--font-outfit), 'Inter', system-ui, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   Scrollbar Styling
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border-default));
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--border-strong));
+}
+
+/* ============================================================
+   Editor Layout Classes
+   ============================================================ */
+.editor-shell {
+  display: grid;
+  grid-template-rows: var(--topbar-h) 1fr;
+  grid-template-columns: var(--toolbar-w) 1fr;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.editor-topbar {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  z-index: 50;
+}
+
+.editor-toolbar {
+  grid-column: 1;
+  grid-row: 2;
+  z-index: 40;
+}
+
+.editor-canvas-area {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Glass Panel
+   ============================================================ */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+/* ============================================================
+   Contextual Pane Slide Animation
+   ============================================================ */
+.pane-enter {
+  animation: paneSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.pane-exit {
+  animation: paneSlideOut 0.18s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes paneSlideIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes paneSlideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-12px); }
+}
+
+/* ============================================================
+   Toolbar Icon Button
+   ============================================================ */
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: hsl(var(--text-muted));
+  background: transparent;
+}
+.toolbar-btn:hover {
+  background: hsl(var(--bg-overlay));
+  color: hsl(var(--text-primary));
+  border-color: hsl(var(--border-subtle));
+}
+.toolbar-btn.active {
+  background: hsla(158, 64%, 52%, 0.14);
+  color: hsl(var(--brand-primary));
+  border-color: hsla(158, 64%, 52%, 0.28);
+}
+
+/* ============================================================
+   Pattern Swatch Card
+   ============================================================ */
+.pattern-card {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.pattern-card:hover {
+  border-color: hsl(var(--brand-primary));
+  transform: scale(1.03);
+  box-shadow: var(--shadow-glow);
+}
+.pattern-card.selected {
+  border-color: hsl(var(--brand-primary));
+  box-shadow: var(--shadow-glow);
+}
+
+/* ============================================================
+   Project Card (Dashboard)
+   ============================================================ */
+.project-card {
+  border-radius: 14px;
+  background: hsl(var(--bg-surface));
+  border: 1px solid hsl(var(--border-subtle));
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.project-card:hover {
+  border-color: hsl(var(--border-strong));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================================
+   Subtle Gradient Shimmer for Thumbnails
+   ============================================================ */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--bg-surface)) 25%,
+    hsl(var(--bg-elevated)) 50%,
+    hsl(var(--bg-surface)) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+/* ============================================================
+   Input / Search
+   ============================================================ */
+.search-input {
+  width: 100%;
+  background: hsl(var(--bg-surface));
+  border: 1px solid hsl(var(--border-default));
+  border-radius: 12px;
+  padding: 10px 16px 10px 44px;
+  color: hsl(var(--text-primary));
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.search-input::placeholder { color: hsl(var(--text-muted)); }
+.search-input:focus {
+  border-color: hsl(var(--brand-primary));
+  box-shadow: 0 0 0 3px hsla(158, 64%, 52%, 0.12);
+}
+
+/* ============================================================
+   Toggle Switch (Studio / Board)
+   ============================================================ */
+.env-toggle {
+  display: flex;
+  align-items: center;
+  background: hsl(var(--bg-surface));
+  border: 1px solid hsl(var(--border-default));
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.env-toggle-btn {
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  color: hsl(var(--text-muted));
+  background: transparent;
+  border: none;
+  white-space: nowrap;
+}
+.env-toggle-btn.active {
+  background: hsl(var(--brand-primary));
+  color: hsl(220, 22%, 7%);
+  box-shadow: 0 2px 8px hsla(158, 64%, 52%, 0.4);
+}
+
+/* ============================================================
+   Micro-animations
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.fade-up   { animation: fadeUp 0.35s cubic-bezier(0.16,1,0.3,1) both; }
+.fade-in   { animation: fadeIn 0.25s ease both; }
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.10s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.20s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+/* ============================================================
+   Mobile Bottom Sheet — slide-up animation
+   ============================================================ */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Mobile Canvas safe area — push canvas above bottom bar
+   ============================================================ */
+@media (max-width: 639px) {
+  .editor-canvas-area {
+    padding-bottom: 56px; /* height of mobile bottom icon bar */
+  }
+
+  /* Reduce env-toggle text size on small screens */
+  .env-toggle-btn {
+    padding: 4px 8px;
+    font-size: 0.65rem;
+  }
+
+  /* Smaller toolbar buttons on mobile */
+  .toolbar-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+}
+
+/* ============================================================
+   xs breakpoint helper (< 480px)
+   ============================================================ */
+@media (min-width: 480px) {
+  .xs\:flex { display: flex; }
+}
+

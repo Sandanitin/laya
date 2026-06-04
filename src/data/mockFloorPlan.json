@@ -1,0 +1,292 @@
+{
+  "meta": {
+    "projectName": "Residence Villa A",
+    "units": "mm",
+    "scale": 1
+  },
+  "rooms": [
+    {
+      "id": "room-living",
+      "name": "Living Room",
+      "areaSqFt": 320,
+      "points": [
+        [100, 100], [500, 100], [500, 400], [100, 400]
+      ]
+    },
+    {
+      "id": "room-kitchen",
+      "name": "Kitchen",
+      "areaSqFt": 180,
+      "points": [
+        [500, 100], [780, 100], [780, 340], [500, 340]
+      ]
+    },
+    {
+      "id": "room-dining",
+      "name": "Dining Room",
+      "areaSqFt": 200,
+      "points": [
+        [500, 340], [780, 340], [780, 560], [500, 560]
+      ]
+    },
+    {
+      "id": "room-master-bed",
+      "name": "Master Bedroom",
+      "areaSqFt": 280,
+      "points": [
+        [100, 400], [420, 400], [420, 700], [100, 700]
+      ]
+    },
+    {
+      "id": "room-bed-2",
+      "name": "Bedroom 2",
+      "areaSqFt": 190,
+      "points": [
+        [420, 400], [700, 400], [700, 600], [420, 600]
+      ]
+    },
+    {
+      "id": "room-bath-1",
+      "name": "Bathroom 1",
+      "areaSqFt": 75,
+      "points": [
+        [420, 600], [580, 600], [580, 700], [420, 700]
+      ]
+    },
+    {
+      "id": "room-bath-2",
+      "name": "Bathroom 2",
+      "areaSqFt": 60,
+      "points": [
+        [580, 600], [700, 600], [700, 700], [580, 700]
+      ]
+    },
+    {
+      "id": "room-hallway",
+      "name": "Hallway",
+      "areaSqFt": 90,
+      "points": [
+        [100, 700], [780, 700], [780, 780], [100, 780]
+      ]
+    },
+    {
+      "id": "room-study",
+      "name": "Study",
+      "areaSqFt": 140,
+      "points": [
+        [700, 400], [900, 400], [900, 600], [700, 600]
+      ]
+    },
+    {
+      "id": "room-garage",
+      "name": "Garage",
+      "areaSqFt": 340,
+      "points": [
+        [780, 100], [1100, 100], [1100, 400], [780, 400]
+      ]
+    },
+    {
+      "id": "room-laundry",
+      "name": "Laundry",
+      "areaSqFt": 80,
+      "points": [
+        [780, 400], [900, 400], [900, 560], [780, 560]
+      ]
+    },
+    {
+      "id": "room-patio",
+      "name": "Patio",
+      "areaSqFt": 260,
+      "points": [
+        [100, 780], [780, 780], [780, 960], [100, 960]
+      ]
+    }
+  ],
+  "vectors": [
+    {
+      "id": "wall-outer-n",
+      "type": "STRUCTURE",
+      "points": [[80, 80], [1120, 80], [1120, 420], [80, 420], [80, 80]]
+    },
+    {
+      "id": "wall-outer-s",
+      "type": "STRUCTURE",
+      "points": [[80, 720], [800, 720], [800, 980], [80, 980], [80, 720]]
+    },
+    {
+      "id": "wall-inner-v1",
+      "type": "STRUCTURE",
+      "points": [[500, 80], [500, 580]]
+    },
+    {
+      "id": "wall-inner-v2",
+      "type": "STRUCTURE",
+      "points": [[780, 80], [780, 620]]
+    },
+    {
+      "id": "wall-inner-v3",
+      "type": "STRUCTURE",
+      "points": [[420, 380], [420, 720]]
+    },
+    {
+      "id": "wall-inner-v4",
+      "type": "STRUCTURE",
+      "points": [[700, 380], [700, 720]]
+    },
+    {
+      "id": "wall-inner-h1",
+      "type": "STRUCTURE",
+      "points": [[80, 400], [800, 400]]
+    },
+    {
+      "id": "wall-inner-h2",
+      "type": "STRUCTURE",
+      "points": [[420, 600], [800, 600]]
+    },
+    {
+      "id": "wall-inner-h3",
+      "type": "STRUCTURE",
+      "points": [[500, 340], [780, 340]]
+    },
+    {
+      "id": "door-living-hall",
+      "type": "OPENING",
+      "points": [[280, 400], [360, 400]]
+    },
+    {
+      "id": "door-kitchen-dining",
+      "type": "OPENING",
+      "points": [[500, 290], [500, 340]]
+    },
+    {
+      "id": "door-master-hall",
+      "type": "OPENING",
+      "points": [[160, 700], [240, 700]]
+    },
+    {
+      "id": "door-bed2-hall",
+      "type": "OPENING",
+      "points": [[480, 600], [560, 600]]
+    },
+    {
+      "id": "door-bath1",
+      "type": "OPENING",
+      "points": [[420, 640], [420, 680]]
+    },
+    {
+      "id": "door-bath2",
+      "type": "OPENING",
+      "points": [[600, 600], [640, 600]]
+    },
+    {
+      "id": "door-study",
+      "type": "OPENING",
+      "points": [[700, 470], [700, 530]]
+    },
+    {
+      "id": "door-garage",
+      "type": "OPENING",
+      "points": [[900, 80], [980, 80]]
+    },
+    {
+      "id": "window-living-n",
+      "type": "OPENING",
+      "points": [[180, 80], [340, 80]]
+    },
+    {
+      "id": "window-living-w",
+      "type": "OPENING",
+      "points": [[80, 200], [80, 300]]
+    },
+    {
+      "id": "window-kitchen-n",
+      "type": "OPENING",
+      "points": [[560, 80], [700, 80]]
+    },
+    {
+      "id": "window-master-w",
+      "type": "OPENING",
+      "points": [[80, 460], [80, 620]]
+    },
+    {
+      "id": "window-patio-s",
+      "type": "OPENING",
+      "points": [[200, 980], [600, 980]]
+    },
+    {
+      "id": "furn-sofa",
+      "type": "FURNITURE",
+      "points": [[130, 130], [380, 130], [380, 210], [130, 210], [130, 130]]
+    },
+    {
+      "id": "furn-coffee-table",
+      "type": "FURNITURE",
+      "points": [[190, 230], [320, 230], [320, 290], [190, 290], [190, 230]]
+    },
+    {
+      "id": "furn-tv-unit",
+      "type": "FURNITURE",
+      "points": [[130, 350], [450, 350], [450, 385], [130, 385], [130, 350]]
+    },
+    {
+      "id": "furn-dining-table",
+      "type": "FURNITURE",
+      "points": [[540, 380], [730, 380], [730, 540], [540, 540], [540, 380]]
+    },
+    {
+      "id": "furn-bed-master",
+      "type": "FURNITURE",
+      "points": [[140, 430], [340, 430], [340, 640], [140, 640], [140, 430]]
+    },
+    {
+      "id": "furn-bed-2",
+      "type": "FURNITURE",
+      "points": [[450, 420], [660, 420], [660, 580], [450, 580], [450, 420]]
+    },
+    {
+      "id": "furn-desk-study",
+      "type": "FURNITURE",
+      "points": [[720, 420], [880, 420], [880, 480], [720, 480], [720, 420]]
+    },
+    {
+      "id": "furn-kitchen-island",
+      "type": "FURNITURE",
+      "points": [[540, 160], [730, 160], [730, 240], [540, 240], [540, 160]]
+    },
+    {
+      "id": "furn-bath1-tub",
+      "type": "FURNITURE",
+      "points": [[430, 615], [560, 615], [560, 680], [430, 680], [430, 615]]
+    },
+    {
+      "id": "furn-bath2-shower",
+      "type": "FURNITURE",
+      "points": [[590, 615], [685, 615], [685, 685], [590, 685], [590, 615]]
+    },
+    {
+      "id": "annot-dim-width",
+      "type": "ANNOTATION",
+      "points": [[80, 1010], [1120, 1010]]
+    },
+    {
+      "id": "annot-dim-height",
+      "type": "ANNOTATION",
+      "points": [[1150, 80], [1150, 980]]
+    },
+    {
+      "id": "annot-grid-x1",
+      "type": "ANNOTATION",
+      "points": [[300, 60], [300, 1000]]
+    },
+    {
+      "id": "annot-grid-x2",
+      "type": "ANNOTATION",
+      "points": [[600, 60], [600, 1000]]
+    },
+    {
+      "id": "annot-grid-x3",
+      "type": "ANNOTATION",
+      "points": [[900, 60], [900, 1000]]
+    }
+  ]
+}
